@@ -68,7 +68,7 @@ export const projects = [
     image: "/projects/jokerwal.webp",
     imageAlt: "Homepage design of the Jokerwal Brothers business website with hero banner and service cards",
     tags: ["Next.js", "Tailwind CSS", "SEO"],
-    liveUrl: "",
+    liveUrl: "https://www.jokerwalbrothers.com",
     featured: true,
   },
   // ↓ Example projects — replace these with your own work.
