@@ -1,5 +1,6 @@
 import { Mail, MessageCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { BackgroundPaths } from "./ui/background-paths";
 import { gmailComposeUrl, socialLinks, whatsappUrl } from "./socials";
 
 export function Contact() {
@@ -9,6 +10,7 @@ export function Contact() {
         <Reveal>
           <div className="relative isolate overflow-hidden rounded-[2rem] border border-line bg-surface/70 px-6 py-16 text-center sm:px-12 md:py-24">
             <div className="grid-bg absolute inset-0 -z-10 opacity-60" aria-hidden />
+            <BackgroundPaths />
             <div
               className="absolute -top-24 left-1/2 -z-10 h-72 w-[36rem] max-w-full -translate-x-1/2 rounded-full bg-accent/25 blur-[100px]"
               aria-hidden
@@ -29,6 +31,7 @@ export function Contact() {
             <div className="mx-auto mt-10 flex max-w-md flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row md:mt-12">
               <a
                 href={whatsappUrl}
+                data-paths-boost
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-emerald-600 px-7 py-4 font-semibold text-white shadow-lg shadow-emerald-600/25 transition duration-500 hover:bg-emerald-500 sm:w-auto"
@@ -38,6 +41,7 @@ export function Contact() {
               </a>
               <a
                 href={gmailComposeUrl}
+                data-paths-boost
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl btn-primary px-7 py-4 font-semibold sm:w-auto"
