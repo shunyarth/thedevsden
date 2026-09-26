@@ -1,7 +1,8 @@
 import { Gauge, HeartHandshake, Smartphone, Sparkles } from "lucide-react";
 import { site } from "@/data/site";
-import { Reveal } from "./Reveal";
+import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { TiltCard } from "./ui/TiltCard";
 
 const values = [
   { Icon: Smartphone, title: "Mobile-first", text: "Looks great on every phone, tablet and laptop." },
@@ -27,14 +28,14 @@ export function About() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {values.map(({ Icon, title, text }, i) => (
-              <Reveal key={title} delay={i * 0.08}>
-                <div className="glow-border h-full rounded-2xl border border-line bg-surface/60 p-5 transition-colors hover:bg-surface">
+              <Reveal key={title} delay={i * 0.08} className="h-full">
+                <TiltCard max={8} className="glow-border h-full rounded-2xl border border-line bg-surface/60 p-5 transition-colors hover:bg-surface">
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent-soft">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <h3 className="font-display text-lg font-semibold">{title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">{text}</p>
-                </div>
+                </TiltCard>
               </Reveal>
             ))}
           </div>

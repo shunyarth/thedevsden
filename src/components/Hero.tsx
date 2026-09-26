@@ -6,8 +6,15 @@ import { ArrowRight, MapPin, MessageCircle } from "lucide-react";
 import { site, skillGroups } from "@/data/site";
 import { BlackHole } from "./BlackHole";
 import { whatsappUrl } from "./socials";
+import { CountUp } from "./ui/CountUp";
+import { LiquidButton } from "./ui/liquid-glass-button";
+import { MagneticButton } from "./ui/MagneticButton";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+// One intro sequence, played in order: logo (navbar) → badge → greeting → name → title → buttons → stats.
+const intro = { badge: 0.1, greeting: 0.2, name: 0.35, title: 0.85, buttons: 1.2, stats: 1.35 };
+const titleWords = (text: string) => text.split(" ");
 
 const skillCount = skillGroups.reduce((n, g) => n + g.skills.length, 0);
 
@@ -46,24 +53,16 @@ export function Hero() {
     >
       {/* Background: grid + moving aurora glow */}
       <div className="grid-bg absolute inset-0 -z-10" aria-hidden />
-      <m.div style={{ y: glowY }} className="absolute inset-0 -z-10" aria-hidden>
-        <m.div
-          className="absolute top-[-15%] left-[20%] h-[560px] w-[560px] rounded-full bg-accent/25 blur-[130px]"
-          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0.9, 0.6] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <m.div
-          className="absolute right-[-10%] bottom-[5%] h-[420px] w-[420px] rounded-full bg-accent-strong/15 blur-[120px]"
-          animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
+      <m.div style={{ y: glowY }} className="absolute inset-0 -z-10 will-change-transform" aria-hidden>
+        <div className="glow-drift-a absolute top-[-15%] left-[20%] h-[560px] w-[560px] bg-[radial-gradient(closest-side,rgb(245_158_11/0.31),transparent)]" />
+        <div className="glow-drift-b absolute right-[-10%] bottom-[5%] h-[420px] w-[420px] bg-[radial-gradient(closest-side,rgb(217_119_6/0.19),transparent)]" />
       </m.div>
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-4 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-8">
         {/* Black hole — above the text on phones, on the right on large screens */}
         <m.div
           style={{ y: sceneY, scale: sceneScale, opacity: sceneOpacity }}
-          className="relative flex w-full items-center justify-center py-2 lg:order-2 lg:py-8"
+          className="relative flex w-full items-center justify-center py-2 will-change-[transform,opacity] lg:order-2 lg:py-8"
         >
           <m.div
             className="w-full"
@@ -77,7 +76,7 @@ export function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 1.3, ease }}
-            className="pointer-events-none absolute right-0 bottom-6 hidden items-center gap-2 rounded-xl border border-line bg-surface-2/80 px-4 py-2.5 text-sm shadow-xl backdrop-blur lg:flex"
+            className="pointer-events-none absolute right-0 bottom-6 hidden items-center gap-2 rounded-xl border border-line bg-surface-2 px-4 py-2.5 text-sm shadow-xl lg:flex"
           >
             <MapPin className="h-4 w-4 text-gold" aria-hidden />
             Based in {site.location}
@@ -86,7 +85,8 @@ export function Hero() {
 
         <div className="relative text-center lg:order-1 lg:text-left">
           <p
-            className="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3.5 py-1.5 text-sm text-muted backdrop-blur"
+            style={{ animationDelay: `${intro.badge}s` }}
+            className="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm text-muted"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60 motion-reduce:hidden" />
@@ -96,7 +96,7 @@ export function Hero() {
           </p>
 
           <h1 className="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl md:text-7xl">
-            <span className="hero-in block text-muted" style={{ animationDelay: "0.1s" }}>
+            <span className="hero-in block text-muted" style={{ animationDelay: `${intro.greeting}s` }}>
               Hi, I&apos;m
             </span>{" "}
             <span className="inline-block pb-2 [perspective:600px]">
@@ -104,18 +104,22 @@ export function Hero() {
                 <m.span
                   key={i}
                   className="hero-letter text-gradient inline-block"
-                  style={{ animationDelay: `${0.3 + i * 0.08}s` }}
+                  style={{ animationDelay: `${intro.name + i * 0.07}s` }}
                   whileHover={{ y: -8, rotateY: 18, transition: { type: "spring", stiffness: 220, damping: 14 } }}
                 >
                   {char}
                 </m.span>
               ))}
             </span>{" "}
-            <span
-              style={{ animationDelay: "0.55s" }}
-              className="hero-in mt-4 block text-xl font-medium tracking-normal text-gold sm:text-2xl"
-            >
-              {site.title} in {site.city}
+            <span className="mt-4 block text-xl font-medium tracking-normal text-gold sm:text-2xl">
+              {titleWords(`${site.title} in ${site.city}`).map((word, i, words) => (
+                <span key={i}>
+                  <span className="hero-word inline-block" style={{ animationDelay: `${intro.title + i * 0.06}s` }}>
+                    {word}
+                  </span>
+                  {i < words.length - 1 && " "}
+                </span>
+              ))}
             </span>
           </h1>
 
@@ -126,33 +130,37 @@ export function Hero() {
           </p>
 
           <div
-            style={{ animationDelay: "0.75s" }}
+            style={{ animationDelay: `${intro.buttons}s` }}
             className="hero-in mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
           >
-            <a
-              href="#projects"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-xl btn-primary px-6 py-3.5 font-semibold sm:w-auto"
-            >
-              View my work
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-            </a>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-line bg-surface/70 px-6 py-3.5 font-semibold text-ink backdrop-blur transition duration-500 hover:border-gold/50 hover:bg-surface-2 sm:w-auto"
-            >
-              <MessageCircle className="h-4 w-4 text-emerald-400" aria-hidden />
-              Chat on WhatsApp
-            </a>
+            <MagneticButton className="w-full sm:w-auto">
+              <LiquidButton asChild size="xl" className="w-full sm:w-auto">
+                <a href="#projects">
+                  View my work
+                  <ArrowRight className="transition-transform duration-300 group-hover/liquid:translate-x-1" aria-hidden />
+                </a>
+              </LiquidButton>
+            </MagneticButton>
+            <MagneticButton className="w-full sm:w-auto">
+              <LiquidButton asChild size="xl" className="w-full sm:w-auto">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="text-emerald-400" aria-hidden />
+                  Chat on WhatsApp
+                </a>
+              </LiquidButton>
+            </MagneticButton>
           </div>
 
-          <dl style={{ animationDelay: "0.95s" }} className="hero-in mt-12 grid grid-cols-3 gap-4 border-t border-line pt-8"
+          <dl
+            style={{ animationDelay: `${intro.stats}s` }}
+            className="hero-in mt-12 grid grid-cols-3 gap-4 border-t border-line pt-8"
           >
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col-reverse">
                 <dt className="text-xs text-muted sm:text-sm">{s.label}</dt>
-                <dd className="font-display text-2xl font-semibold text-ink sm:text-3xl">{s.value}</dd>
+                <dd className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+                  <CountUp value={s.value} delay={intro.stats} />
+                </dd>
               </div>
             ))}
           </dl>

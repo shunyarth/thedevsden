@@ -2,6 +2,8 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { servicePages } from "@/data/servicePages";
 import { gmailComposeUrl, socialLinks, whatsappUrl } from "./socials";
+import { BackToTop } from "./BackToTop";
+import { CopyButton } from "./ui/CopyButton";
 
 export function Footer() {
   return (
@@ -40,10 +42,11 @@ export function Footer() {
           <div>
             <h2 className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">Get in touch</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
-              <li>
+              <li className="flex items-center gap-1.5">
                 <a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer" className="text-muted transition-colors hover:text-ink">
                   {site.contact.email}
                 </a>
+                <CopyButton text={site.contact.email} label="Copy email address" />
               </li>
               <li>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-muted transition-colors hover:text-ink">
@@ -74,9 +77,7 @@ export function Footer() {
                 <Icon className="h-5 w-5" />
               </a>
             ))}
-            <a href="#top" className="transition-colors hover:text-ink">
-              Back to top ↑
-            </a>
+            <BackToTop />
           </div>
         </div>
       </div>

@@ -6,6 +6,9 @@ import { MotionProvider } from "@/components/MotionProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { RevealObserver } from "@/components/ui/RevealObserver";
+import { GlassFilter } from "@/components/ui/liquid-glass-button";
+import { CursorGlow } from "@/components/ui/CursorGlow";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -65,14 +68,32 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}>
+    <html
+      lang="en-IN"
+      className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Lets scroll-reveal hide content only when JavaScript is running.
+            glass-svg: only Chromium browsers can draw the SVG liquid-glass effect; others keep a frosted blur.
+            It is switched on ~2s after load: drawing the filter doubled the cost of the first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "var d=document.documentElement;d.classList.add('js');if(navigator.userAgentData)addEventListener('load',function(){setTimeout(function(){d.classList.add('glass-svg')},2000)})",
+          }}
+        />
+      </head>
       <body className="min-h-screen overflow-x-hidden">
         <JsonLd data={siteJsonLd()} />
+        <GlassFilter />
         <MotionProvider>
           <Navbar />
           {children}
           <Footer />
+          <CursorGlow />
         </MotionProvider>
+        <RevealObserver />
       </body>
     </html>
   );

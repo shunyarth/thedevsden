@@ -1,11 +1,8 @@
-"use client";
-
 import Link from "next/link";
-import { m } from "framer-motion";
 import { AppWindow, ArrowRight, Check, Globe, ShoppingCart } from "lucide-react";
 import { services } from "@/data/site";
 import { SectionHeading } from "./SectionHeading";
-import { TiltCard } from "./TiltCard";
+import { SpotlightCard } from "./ui/SpotlightCard";
 
 const icons = { globe: Globe, app: AppWindow, cart: ShoppingCart };
 
@@ -23,16 +20,14 @@ export function Services() {
           {services.map((service, i) => {
             const Icon = icons[service.icon];
             return (
-              <m.div
+              <div
                 key={service.title}
-                initial={{ opacity: 0, y: 48 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-                transition={{ duration: 1.1, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                >
-                <TiltCard className="glow-border flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface/60 p-7 transition-colors duration-500 hover:bg-surface">
+                data-reveal
+                style={{ "--reveal-delay": `${i * 0.15}s`, "--reveal-y": "48px" } as React.CSSProperties}
+              >
+                <SpotlightCard className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface/60 p-7 transition-colors duration-500 hover:bg-surface">
                 <div
-                  className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-accent/10 blur-3xl"
+                  className="absolute -top-16 -right-16 h-40 w-40 bg-[radial-gradient(closest-side,rgb(245_158_11/0.13),transparent)]"
                   aria-hidden
                 />
                 <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-soft via-gold to-accent-strong text-bg shadow-lg shadow-accent/30">
@@ -55,8 +50,8 @@ export function Services() {
                   Learn more about {service.title.toLowerCase()}
                   <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover/link:translate-x-1" aria-hidden />
                 </Link>
-                </TiltCard>
-              </m.div>
+                </SpotlightCard>
+              </div>
             );
           })}
         </div>

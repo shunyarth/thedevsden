@@ -196,10 +196,11 @@ export function BackgroundPaths() {
 
   return (
     <div ref={rootRef} className={styles.root} style={MASK_VARS} aria-hidden>
-      {!reducedMotion && <m.div className={styles.glow} style={{ x: glowX, y: glowY, opacity: glowOpacity }} />}
+      {/* Same markup for everyone (avoids hydration mismatches); CSS hides the effects for reduced motion. */}
+      <m.div className={styles.glow} style={{ x: glowX, y: glowY, opacity: glowOpacity }} />
       <m.div
         className={styles.layer}
-        style={reducedMotion ? undefined : { x, y, rotateX, rotateY, transformPerspective: 900 }}
+        style={{ x, y, rotateX, rotateY, transformPerspective: 900 }}
       >
         <svg className={styles.lines} viewBox={VIEWBOX} fill="none" preserveAspectRatio="xMidYMid slice">
           {PATHS.map((p, i) => (
@@ -213,18 +214,16 @@ export function BackgroundPaths() {
             />
           ))}
         </svg>
-        {!reducedMotion && (
-          <div className={styles.sheen}>
-            {BANDS.map((b, i) => (
-              <div
-                key={i}
-                className={styles.band}
-                style={{ "--duration": `${b.duration}s`, "--delay": `${b.delay}s` } as React.CSSProperties}
-              />
-            ))}
-            <m.div className={styles.cursorLight} style={{ x: lightX, y: lightY, opacity: glowOpacity }} />
-          </div>
-        )}
+        <div className={styles.sheen}>
+          {BANDS.map((b, i) => (
+            <div
+              key={i}
+              className={styles.band}
+              style={{ "--duration": `${b.duration}s`, "--delay": `${b.delay}s` } as React.CSSProperties}
+            />
+          ))}
+          <m.div className={styles.cursorLight} style={{ x: lightX, y: lightY, opacity: glowOpacity }} />
+        </div>
       </m.div>
       <div ref={rippleRef} className="absolute inset-0" />
     </div>

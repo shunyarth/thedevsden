@@ -65,7 +65,7 @@ export const projects = [
     title: "Jokerwal Brothers",
     description:
       "A modern, fully responsive business website for Jokerwal Brothers — showcasing their services, building trust with customers, and making it easy to get in touch.",
-    image: "/projects/jokerwal.svg",
+    image: "/projects/jokerwal.webp",
     imageAlt: "Homepage design of the Jokerwal Brothers business website with hero banner and service cards",
     tags: ["Next.js", "Tailwind CSS", "SEO"],
     liveUrl: "",
@@ -76,7 +76,7 @@ export const projects = [
     title: "ShopNest Store",
     description:
       "An online store with product search, cart, secure checkout and an admin panel to manage orders.",
-    image: "/projects/shop.svg",
+    image: "/projects/shop.webp",
     imageAlt: "ShopNest online store product grid showing prices and add-to-cart buttons",
     tags: ["WooCommerce", "WordPress", "PHP"],
     liveUrl: "",
@@ -85,7 +85,7 @@ export const projects = [
     title: "TaskFlow Dashboard",
     description:
       "A team task-management web app with login, real-time updates and a clean, fast dashboard.",
-    image: "/projects/dashboard.svg",
+    image: "/projects/dashboard.webp",
     imageAlt: "TaskFlow dashboard web app with stats cards, a progress chart and team task list",
     tags: ["React", "Node.js", "MongoDB"],
     liveUrl: "",
@@ -94,7 +94,7 @@ export const projects = [
     title: "Spice Route Restaurant",
     description:
       "A mouth-watering restaurant website with an online menu, table booking and WhatsApp ordering.",
-    image: "/projects/restaurant.svg",
+    image: "/projects/restaurant.webp",
     imageAlt: "Spice Route restaurant website homepage with menu highlights and booking button",
     tags: ["Vue", "Firebase", "SASS"],
     liveUrl: "",

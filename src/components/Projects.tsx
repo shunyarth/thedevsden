@@ -1,11 +1,9 @@
-"use client";
-
 import Image from "next/image";
-import { m } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Eye } from "lucide-react";
 import { projects } from "@/data/site";
 import { SectionHeading } from "./SectionHeading";
-import { TiltCard } from "./TiltCard";
+import { TiltCard } from "./ui/TiltCard";
+import { MagneticButton } from "./ui/MagneticButton";
 
 export function Projects() {
   return (
@@ -19,12 +17,10 @@ export function Projects() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
-            <m.article
+            <article
               key={project.title}
-              initial={{ opacity: 0, y: 48 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-              transition={{ duration: 1.1, delay: (i % 2) * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              data-reveal="zoom"
+              style={{ "--reveal-delay": `${(i % 2) * 0.15}s` } as React.CSSProperties}
               className={"featured" in project && project.featured ? "md:col-span-2" : undefined}
             >
               <TiltCard
@@ -47,6 +43,26 @@ export function Projects() {
                   className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent" />
+                {project.liveUrl && (
+                  // Mouse shortcut to the same live site; keyboard and screen-reader users use the button below.
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={-1}
+                    aria-hidden
+                    className="absolute inset-0 cursor-pointer"
+                  />
+                )}
+                {project.liveUrl && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute bottom-4 left-4 inline-flex translate-y-3 items-center gap-1.5 rounded-xl border border-gold/30 bg-bg/80 px-3 py-1.5 text-sm font-semibold text-gold-soft opacity-0 shadow-lg transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100"
+                  >
+                    <Eye className="h-4 w-4" />
+                    View
+                  </span>
+                )}
                 {"featured" in project && project.featured && (
                   <span className="absolute top-4 right-4 rounded-full bg-gradient-to-r from-gold to-gold-soft px-3 py-1 text-xs font-semibold text-bg shadow-lg">
                     Featured
@@ -68,15 +84,17 @@ export function Projects() {
 
                 <div className="mt-auto pt-6">
                   {project.liveUrl ? (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl btn-primary px-5 py-3 text-sm font-semibold"
-                    >
-                      View live site
-                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-                    </a>
+                    <MagneticButton max={6}>
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-xl btn-primary px-5 py-3 text-sm font-semibold"
+                      >
+                        View live site
+                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
+                      </a>
+                    </MagneticButton>
                   ) : (
                     <span className="inline-flex items-center gap-2 rounded-xl border border-line px-5 py-3 text-sm text-muted">
                       Live link coming soon
@@ -85,7 +103,7 @@ export function Projects() {
                 </div>
               </div>
               </TiltCard>
-            </m.article>
+            </article>
           ))}
         </div>
       </div>

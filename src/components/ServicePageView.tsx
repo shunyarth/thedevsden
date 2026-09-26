@@ -6,7 +6,9 @@ import { site } from "@/data/site";
 import { ogImages, serviceJsonLd, twitterImages } from "@/lib/seo";
 import { Contact } from "./Contact";
 import { JsonLd } from "./JsonLd";
-import { Reveal } from "./Reveal";
+import { Reveal } from "./ui/Reveal";
+import { LiquidButton } from "./ui/liquid-glass-button";
+import { MagneticButton } from "./ui/MagneticButton";
 import { gmailComposeUrl, whatsappUrl } from "./socials";
 
 export function serviceMetadata(page: ServicePage): Metadata {
@@ -32,7 +34,7 @@ export function ServicePageView({ page }: { page: ServicePage }) {
       <section id="top" className="relative isolate overflow-hidden pt-32 pb-16 sm:pt-40 md:pb-20">
         <div className="grid-bg absolute inset-0 -z-10" aria-hidden />
         <div
-          className="absolute top-[-20%] left-1/2 -z-10 h-[480px] w-[640px] max-w-full -translate-x-1/2 rounded-full bg-accent/20 blur-[130px]"
+          className="absolute top-[-20%] left-1/2 -z-10 h-[480px] w-[640px] max-w-full -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(245_158_11/0.25),transparent)]"
           aria-hidden
         />
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
@@ -58,24 +60,22 @@ export function ServicePageView({ page }: { page: ServicePage }) {
             ))}
           </div>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-emerald-600 px-7 py-4 font-semibold text-white shadow-lg shadow-emerald-600/25 transition duration-500 hover:bg-emerald-500 sm:w-auto"
-            >
-              <MessageCircle className="h-5 w-5" aria-hidden />
-              Discuss your project on WhatsApp
-            </a>
-            <a
-              href={gmailComposeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl btn-primary px-7 py-4 font-semibold sm:w-auto"
-            >
-              <Mail className="h-5 w-5" aria-hidden />
-              Send an email
-            </a>
+            <MagneticButton className="w-full sm:w-auto">
+              <LiquidButton asChild size="xxl" className="h-auto min-h-14 w-full py-3 text-center whitespace-normal sm:w-auto">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="size-5 text-emerald-400" aria-hidden />
+                  Discuss your project on WhatsApp
+                </a>
+              </LiquidButton>
+            </MagneticButton>
+            <MagneticButton className="w-full sm:w-auto">
+              <LiquidButton asChild size="xxl" className="w-full sm:w-auto">
+                <a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer">
+                  <Mail className="size-5" aria-hidden />
+                  Send an email
+                </a>
+              </LiquidButton>
+            </MagneticButton>
           </div>
         </div>
       </section>

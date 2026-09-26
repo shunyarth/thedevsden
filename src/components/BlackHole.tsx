@@ -72,7 +72,7 @@ export function BlackHole({ active }: BlackHoleProps) {
       data-paused={!active || undefined}
       aria-hidden
     >
-      <m.div className="absolute inset-0 [transform-style:preserve-3d]" style={{ rotateX, rotateY }}>
+      <m.div className="absolute inset-0 will-change-transform [transform-style:preserve-3d]" style={{ rotateX, rotateY }}>
         {/* Static background specks */}
         {specks.map(([sx, sy, size], i) => (
           <span
@@ -110,24 +110,23 @@ export function BlackHole({ active }: BlackHoleProps) {
 
         {/* Stars being pulled in */}
         <m.div className="absolute inset-0" style={{ x: starsX, y: starsY }}>
-          {stars.map((s, i) => (
-            <div
-              key={i}
-              className={`bh-orbit absolute inset-0 ${s.mobile ? "" : "hidden sm:block"}`}
-              style={
-                {
-                  "--start": `${s.angle}deg`,
-                  "--dur": `${s.dur}s`,
-                  "--delay": `-${s.delay}s`,
-                } as React.CSSProperties
-              }
-            >
-              <span
-                className="bh-star absolute top-1/2 left-1/2 rounded-full bg-gold-soft shadow-[0_0_6px_2px_rgba(253,230,138,0.7)]"
-                style={{ width: s.size, height: s.size, marginTop: -s.size / 2, marginLeft: -s.size / 2 }}
-              />
-            </div>
-          ))}
+          {stars.map((s, i) => {
+            const timing = { animationDuration: `${s.dur}s`, animationDelay: `-${s.delay}s` };
+            return (
+              <div
+                key={i}
+                className={`absolute inset-0 ${s.mobile ? "" : "hidden sm:block"}`}
+                style={{ transform: `rotate(${s.angle}deg)` }}
+              >
+                <div className="bh-orbit absolute inset-0" style={timing}>
+                  <span
+                    className="bh-star absolute top-1/2 left-1/2 rounded-full bg-gold-soft shadow-[0_0_6px_2px_rgba(253,230,138,0.7)]"
+                    style={{ ...timing, width: s.size, height: s.size, marginTop: -s.size / 2, marginLeft: -s.size / 2 }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </m.div>
       </m.div>
     </div>

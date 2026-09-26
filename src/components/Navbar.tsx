@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, m, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, m, useScroll, useSpring, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useLenis } from "lenis/react";
 import { site } from "@/data/site";
+import { LiquidButton } from "./ui/liquid-glass-button";
+import { MagneticButton } from "./ui/MagneticButton";
+
+const UNDERLINE_BASE = 100; // px — the underline is scaled from this width, so it only ever moves by transform
 
 const links = [
   { href: "#about", label: "About" },
@@ -33,6 +37,14 @@ export function Navbar() {
   const lenis = useLenis();
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+
+  // Gold underline that slides to the active link.
+  const listRef = useRef<HTMLUListElement>(null);
+  const lineSpring = { stiffness: 380, damping: 34 };
+  const lineX = useSpring(0, lineSpring);
+  const lineW = useSpring(0, lineSpring);
+  const lineOpacity = useSpring(0, { stiffness: 200, damping: 30 });
+  const lineScale = useTransform(lineW, (w) => w / UNDERLINE_BASE);
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,6 +74,31 @@ export function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const place = () => {
+      const link = list.querySelector<HTMLElement>("a[data-active]");
+      if (!link) return lineOpacity.set(0);
+      const x = link.offsetLeft + 12;
+      const w = link.offsetWidth - 24;
+      // First appearance: start in place instead of sliding in from the left edge.
+      if (lineOpacity.get() < 0.05) {
+        lineX.jump(x);
+        lineW.jump(w);
+      } else {
+        lineX.set(x);
+        lineW.set(w);
+      }
+      lineOpacity.set(1);
+    };
+    place();
+    // Re-measure when fonts load or the window resizes.
+    const resize = new ResizeObserver(place);
+    resize.observe(list);
+    return () => resize.disconnect();
+  }, [active, pathname, lineX, lineW, lineOpacity]);
+
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     if (open) lenis?.stop();
     else lenis?.start();
@@ -73,21 +110,21 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <m.div
-        className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-accent to-gold"
+        className="absolute inset-x-0 top-0 h-0.5 origin-left will-change-transform bg-gradient-to-r from-accent to-gold"
         style={{ scaleX: progress }}
         aria-hidden
       />
       <nav
-        className={`mx-auto mt-3 flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:px-6 ${
+        className={`mx-3 mt-3 flex max-w-6xl origin-top items-center justify-between rounded-2xl border px-4 py-3 transition-[transform,background-color,border-color,box-shadow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:mx-auto sm:px-6 ${
           scrolled || open
-            ? "mx-3 border border-line bg-bg/75 shadow-lg shadow-black/30 backdrop-blur-xl sm:mx-auto"
-            : "border border-transparent"
+            ? "-translate-y-1 scale-[0.97] border-line bg-bg/70 shadow-lg shadow-black/30 backdrop-blur-md"
+            : "border-transparent"
         }`}
         aria-label="Main"
       >
         <Link
           href={onHome ? "#top" : "/"}
-          className="font-display text-lg font-semibold tracking-tight"
+          className={`font-display text-lg font-semibold tracking-tight ${onHome ? "hero-in" : ""}`}
           onClick={() => setOpen(false)}
           aria-label={`${site.brand} — home`}
         >
@@ -95,33 +132,33 @@ export function Navbar() {
           <span className="text-accent-soft">.</span>
         </Link>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul ref={listRef} className="relative hidden items-center gap-1 md:flex">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={resolveHref(link.href, onHome)}
-                className={`relative rounded-lg px-3 py-2 text-sm transition-colors ${
+                data-active={isActive(link.href) || undefined}
+                aria-current={isActive(link.href) ? (link.href.startsWith("/") ? "page" : "true") : undefined}
+                className={`relative rounded-lg px-3 py-2 text-sm transition-colors duration-300 ${
                   isActive(link.href) ? "text-ink" : "text-muted hover:text-ink"
                 }`}
               >
-                <span
-                  aria-hidden
-                  className={`absolute inset-0 -z-10 rounded-lg bg-surface-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isActive(link.href) ? "scale-100 opacity-100" : "scale-90 opacity-0"
-                  }`}
-                />
                 {link.label}
               </a>
             </li>
           ))}
+          <m.li
+            aria-hidden
+            className="pointer-events-none absolute bottom-0 left-0 h-0.5 origin-left bg-gradient-to-r from-gold to-gold-soft"
+            style={{ x: lineX, scaleX: lineScale, opacity: lineOpacity, width: UNDERLINE_BASE }}
+          />
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-xl btn-primary px-4 py-2 text-sm font-semibold md:inline-flex"
-        >
-          Hire me
-        </a>
+        <MagneticButton className="hidden md:inline-flex" max={6}>
+          <LiquidButton asChild size="default">
+            <a href="#contact">Hire me</a>
+          </LiquidButton>
+        </MagneticButton>
 
         <button
           type="button"
@@ -139,7 +176,7 @@ export function Navbar() {
         {open && (
           <m.div
             id="mobile-menu"
-            className="mx-3 mt-2 rounded-2xl border border-line bg-bg/95 p-3 backdrop-blur-xl md:hidden"
+            className="mx-3 mt-2 rounded-2xl border border-line bg-bg p-3 md:hidden"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8, transition: { duration: 0.15 } }}
@@ -163,13 +200,11 @@ export function Navbar() {
                 </m.li>
               ))}
             </ul>
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 block rounded-xl btn-primary px-4 py-3 text-center font-semibold"
-            >
-              Hire me
-            </a>
+            <LiquidButton asChild size="xl" className="mt-2 flex w-full">
+              <a href="#contact" onClick={() => setOpen(false)}>
+                Hire me
+              </a>
+            </LiquidButton>
           </m.div>
         )}
       </AnimatePresence>
