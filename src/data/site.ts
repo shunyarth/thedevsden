@@ -82,13 +82,13 @@ export const projects = [
     liveUrl: "",
   },
   {
-    title: "TaskFlow Dashboard",
+    title: "Digital Edge — Master SKU Tool",
     description:
-      "A team task-management web app with login, real-time updates and a clean, fast dashboard.",
+      "A web app for Meesho and Snapdeal sellers — sorts shipping labels, maps SKUs, tracks stock and shows reports, with login, subscriptions and English/Hindi support.",
     image: "/projects/dashboard.webp",
-    imageAlt: "TaskFlow dashboard web app with stats cards, a progress chart and team task list",
-    tags: ["React", "Node.js", "MongoDB"],
-    liveUrl: "",
+    imageAlt: "Dashboard web app with stats cards, a progress chart and a task list",
+    tags: ["Supabase", "Razorpay", "PDF.js"],
+    liveUrl: "https://ksdigiedge.vercel.app",
   },
   {
     title: "Spice Route Restaurant",
