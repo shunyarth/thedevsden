@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { site } from "@/data/site";
 
 export const ogSize = { width: 1200, height: 630 };
-export const ogAlt = `${site.brand} — ${site.name}, ${site.title} in ${site.city}, India`;
+export const ogAlt = `${site.brand} — ${site.name}, ${site.title} in ${site.country}`;
 
 // The 1200×630 preview picture shown when your link is shared on WhatsApp, LinkedIn, X, Facebook…
 export function renderOgImage() {
@@ -42,7 +42,7 @@ export function renderOgImage() {
             {site.brand}
           </div>
           <div style={{ display: "flex", fontSize: 34, color: "#b8ab93", marginTop: 28, lineHeight: 1.35 }}>
-            Websites, web apps & e-commerce stores — {site.city}, India
+            Websites, web apps & e-commerce stores — {site.country}
           </div>
         </div>
 

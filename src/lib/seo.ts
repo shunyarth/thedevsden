@@ -5,7 +5,7 @@ export const absoluteUrl = (path = "/") => new URL(path, site.url).toString();
 
 // Pages that set their own openGraph/twitter text must list the preview image again,
 // otherwise Next.js replaces the site-wide one.
-const previewAlt = `${site.brand} — ${site.name}, ${site.title} in ${site.city}, India`;
+const previewAlt = `${site.brand} — ${site.name}, ${site.title} in ${site.country}`;
 export const ogImages = [{ url: "/opengraph-image", width: 1200, height: 630, alt: previewAlt }];
 export const twitterImages = [{ url: "/twitter-image", width: 1200, height: 630, alt: previewAlt }];
 
@@ -14,8 +14,7 @@ export const BUSINESS_ID = absoluteUrl("/#business");
 export const WEBSITE_ID = absoluteUrl("/#website");
 
 export const defaultKeywords = [
-  "web developer in Ahmedabad",
-  "website developer in Ahmedabad",
+  "web developer in India",
   "website developer India",
   "freelance web developer",
   "Shopify developer",
@@ -31,8 +30,6 @@ export const defaultKeywords = [
 
 const address = {
   "@type": "PostalAddress",
-  addressLocality: site.city,
-  addressRegion: site.region,
   addressCountry: "IN",
 };
 
@@ -72,7 +69,7 @@ export function siteJsonLd() {
         "@id": BUSINESS_ID,
         name: site.brand,
         alternateName: `${site.brand} — ${site.name}, ${site.title}`,
-        description: `${site.brand} is the web development studio of ${site.name}, a ${site.title.toLowerCase()} in ${site.city} building websites, web apps and e-commerce stores for businesses across India.`,
+        description: `${site.brand} is the web development studio of ${site.name}, a ${site.title.toLowerCase()} building websites, web apps and e-commerce stores for businesses across India.`,
         url: site.url,
         image: absoluteUrl("/opengraph-image"),
         logo: absoluteUrl("/icon.svg"),
@@ -80,10 +77,7 @@ export function siteJsonLd() {
         telephone: site.contact.phone,
         address,
         founder: { "@id": PERSON_ID },
-        areaServed: [
-          { "@type": "City", name: site.city },
-          { "@type": "Country", name: site.country },
-        ],
+        areaServed: { "@type": "Country", name: site.country },
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer service",
@@ -126,10 +120,7 @@ export function serviceJsonLd(page: ServicePage) {
         description: page.description,
         url,
         provider: { "@id": BUSINESS_ID },
-        areaServed: [
-          { "@type": "City", name: site.city },
-          { "@type": "Country", name: site.country },
-        ],
+        areaServed: { "@type": "Country", name: site.country },
       },
       {
         "@type": "FAQPage",

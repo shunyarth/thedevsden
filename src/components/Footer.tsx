@@ -16,8 +16,8 @@ export function Footer() {
               <span className="text-accent-soft">.</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-              {site.name} — {site.title.toLowerCase()} in {site.city}, {site.country}. Websites, web apps and online
-              stores for businesses across India.
+              {site.name} — {site.title.toLowerCase()}. Websites, web apps and online stores for businesses across
+              {" "}{site.country}.
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="text-muted">
-                {site.city}, {site.region}, {site.country}
+                {site.country}
               </li>
             </ul>
           </div>

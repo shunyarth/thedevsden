@@ -112,7 +112,7 @@ export function Hero() {
               ))}
             </span>{" "}
             <span className="mt-4 block text-xl font-medium tracking-normal text-gold sm:text-2xl">
-              {titleWords(`${site.title} in ${site.city}`).map((word, i, words) => (
+              {titleWords(`${site.title} in ${site.country}`).map((word, i, words) => (
                 <span key={i}>
                   <span className="hero-word inline-block" style={{ animationDelay: `${intro.title + i * 0.06}s` }}>
                     {word}

@@ -12,16 +12,14 @@ export const site = {
   tagline:
     "I build fast, modern websites and web apps that help businesses stand out and grow online.",
   // Where you work — used on the page and for Google (local search)
-  city: "Ahmedabad",
-  region: "Gujarat",
   country: "India",
-  location: "Ahmedabad, India",
+  location: "India",
   // The live website address (used for Google, sitemap and link previews)
   url: "https://thedevsden.vercel.app",
   yearsExperience: 2,
 
   about: [
-    "Hi, I'm Keyur — a web developer based in Ahmedabad with 2 years of hands-on experience turning ideas into fast, good-looking websites and web applications.",
+    "Hi, I'm Keyur — a web developer based in India with 2 years of hands-on experience turning ideas into fast, good-looking websites and web applications.",
     "I work across the full stack: from pixel-perfect, mobile-friendly designs on the front end to reliable servers and databases behind the scenes. Whether it's a business website, an online store, or a custom web app, I care about clean code, smooth performance, and a great experience for every visitor.",
     "I enjoy working closely with clients, keeping things simple, and delivering work that actually moves their business forward.",
   ],
@@ -70,6 +68,15 @@ export const projects = [
     tags: ["Next.js", "Tailwind CSS", "SEO"],
     liveUrl: "https://www.jokerwalbrothers.com",
     featured: true,
+  },
+  {
+    title: "The Embresa Studio",
+    description:
+      "A website for a beauty studio — a treatments menu with prices, appointment booking confirmed on WhatsApp, and an online shop for hair and skincare products.",
+    image: "/projects/embresa.webp",
+    imageAlt: "The Embresa Studio homepage with the headline “Quiet beauty, done well” and Book appointment and Shop products buttons",
+    tags: ["Next.js", "Online Booking", "E-commerce"],
+    liveUrl: "https://theembresastudio.vercel.app",
   },
   // ↓ Example projects — replace these with your own work.
   {

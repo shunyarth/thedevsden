@@ -21,8 +21,8 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
-const defaultTitle = `${site.name} — ${site.title} in ${site.city}, India | ${site.brand}`;
-const defaultDescription = `Freelance web developer in ${site.city}. ${site.name} (${site.brand}) builds fast, SEO-ready websites, web apps and Shopify & WordPress stores across India.`;
+const defaultTitle = `${site.name} — ${site.title} in ${site.country} | ${site.brand}`;
+const defaultDescription = `Freelance web developer in ${site.country}. ${site.name} (${site.brand}) builds fast, SEO-ready websites, web apps and Shopify & WordPress stores across India.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

@@ -9,7 +9,7 @@ import { ogImages, twitterImages } from "@/lib/seo";
 const posts = getAllPosts();
 
 const title = "Blog — Web Development Tips for Businesses";
-const description = `Practical guides on websites, Shopify, WordPress, web apps and SEO for small businesses in ${site.city} and across India, by ${site.name} (${site.brand}).`;
+const description = `Practical guides on websites, Shopify, WordPress, web apps and SEO for small businesses across ${site.country}, by ${site.name} (${site.brand}).`;
 
 export const metadata: Metadata = {
   title,

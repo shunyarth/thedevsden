@@ -15,7 +15,7 @@ export function About() {
   return (
     <section id="about" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading eyebrow="About me" title="A web developer in Ahmedabad building websites people love" />
+        <SectionHeading eyebrow="About me" title="A web developer building websites people love" />
 
         <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <Reveal className="space-y-5 text-lg leading-relaxed text-muted">

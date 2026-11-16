@@ -2,7 +2,7 @@
 title: Your article title (around 50–60 characters works best on Google)
 description: One or two sentences that sum up the article. Shown on Google and in link previews.
 date: 2026-10-01
-tags: WordPress, SEO, Ahmedabad
+tags: WordPress, SEO, Small Business
 draft: true
 ---
 

@@ -29,21 +29,20 @@ export const servicePages: ServicePage[] = [
   {
     slug: "website-development",
     name: "Website Development",
-    seoTitle: "Website Developer in Ahmedabad — Custom & WordPress Websites",
+    seoTitle: "Website Developer in India — Custom & WordPress Websites",
     description:
-      "Fast, mobile-friendly, SEO-ready websites for businesses in Ahmedabad and across India. Custom Next.js or WordPress websites by Keyur (devsden).",
+      "Fast, mobile-friendly, SEO-ready websites for businesses across India. Custom Next.js or WordPress websites by Keyur (devsden).",
     keywords: [
-      "website developer in Ahmedabad",
-      "web developer in Ahmedabad",
+      "web developer in India",
       "website developer India",
       "WordPress developer",
       "business website design",
-      "freelance web developer Ahmedabad",
+      "freelance web developer India",
     ],
-    h1: "Website Development in Ahmedabad",
+    h1: "Website Development for Growing Businesses",
     intro: [
       "Your website is often the first thing a customer sees before they call you, visit your shop or hire you. If it loads slowly, looks broken on a phone or is hard to find on Google, people simply move on to the next result. I build websites that fix exactly that: fast, clean, easy to update and designed to turn visitors into enquiries.",
-      "I'm Keyur, a web developer based in Ahmedabad, and I work with small businesses, startups and professionals across India. Every site is built around your goals — whether that's more phone calls, more WhatsApp messages or more walk-ins.",
+      "I'm Keyur, a web developer based in India, and I work with small businesses, startups and professionals across India. Every site is built around your goals — whether that's more phone calls, more WhatsApp messages or more walk-ins.",
     ],
     sections: [
       {
@@ -77,13 +76,13 @@ export const servicePages: ServicePage[] = [
       {
         heading: "Who this is for",
         paragraphs: [
-          "Local shops, clinics, consultants, coaches, manufacturers, restaurants and service businesses in Ahmedabad and Gujarat — and anyone in India who wants a professional online presence that works as hard as they do. If you already have a website that feels outdated or slow, I can redesign it while keeping the content and Google rankings you have already earned.",
+          "Local shops, clinics, consultants, coaches, manufacturers, restaurants and service businesses — anyone in India who wants a professional online presence that works as hard as they do. If you already have a website that feels outdated or slow, I can redesign it while keeping the content and Google rankings you have already earned.",
         ],
       },
       {
-        heading: "Why work with a local web developer",
+        heading: "Why work directly with a developer",
         paragraphs: [
-          "Working with a developer in Ahmedabad means you speak to the person actually building your site — no agency layers, no confusion. You get honest advice, quick replies on WhatsApp and a website that is built to last, not just to look good on launch day.",
+          "Working directly with me means you speak to the person actually building your site — no agency layers, no confusion. You get honest advice, quick replies on WhatsApp and a website that is built to last, not just to look good on launch day.",
         ],
       },
     ],
@@ -97,8 +96,8 @@ export const servicePages: ServicePage[] = [
         a: "Yes. Every website I build is mobile-first, which means it is designed for phones from the start and then scaled up for tablets and desktops. Most of your visitors will arrive on a phone, so this is never an afterthought.",
       },
       {
-        q: "Do you work only with businesses in Ahmedabad?",
-        a: "No. I'm based in Ahmedabad and happy to meet local clients, but I work with businesses all over India. Most projects run smoothly over WhatsApp, phone and video calls.",
+        q: "Do you work with businesses anywhere in India?",
+        a: "Yes. I work with businesses all over India. Most projects run smoothly over WhatsApp, phone and video calls.",
       },
       {
         q: "Can I update the website myself after it's live?",
@@ -119,7 +118,7 @@ export const servicePages: ServicePage[] = [
     keywords: [
       "web app developer for small business",
       "custom web application development",
-      "web app developer in Ahmedabad",
+      "web app developer India",
       "React developer India",
       "Next.js developer",
       "dashboard development",
@@ -127,7 +126,7 @@ export const servicePages: ServicePage[] = [
     h1: "Web App Development for Small Businesses",
     intro: [
       "Many small businesses still run on spreadsheets, paper registers and endless WhatsApp messages. It works — until it doesn't. Orders get missed, data is scattered and the same tasks are repeated every day. A custom web app brings everything into one place that you and your team can open from any browser.",
-      "I'm Keyur, a web app developer based in Ahmedabad. I build practical, easy-to-use web applications for small businesses across India, designed around the way you already work instead of forcing you into software that doesn't fit.",
+      "I'm Keyur, a web app developer based in India. I build practical, easy-to-use web applications for small businesses across India, designed around the way you already work instead of forcing you into software that doesn't fit.",
     ],
     sections: [
       {
@@ -200,19 +199,19 @@ export const servicePages: ServicePage[] = [
     name: "E-commerce Development",
     seoTitle: "Shopify & WooCommerce Developer — E-commerce Websites",
     description:
-      "Online stores that sell: Shopify developer and WooCommerce expert in Ahmedabad building fast, mobile-friendly e-commerce websites with secure payments.",
+      "Online stores that sell: Shopify developer and WooCommerce expert building fast, mobile-friendly e-commerce websites with secure payments.",
     keywords: [
       "Shopify developer",
       "Shopify developer India",
       "WooCommerce developer",
-      "ecommerce website developer in Ahmedabad",
+      "ecommerce website developer India",
       "online store development",
       "WordPress developer",
     ],
     h1: "E-commerce Website Development — Shopify & WooCommerce",
     intro: [
       "Selling online is one of the best ways to grow a business in India, but a slow or confusing store loses customers at every step. I build e-commerce websites that are fast, trustworthy and easy to shop on — especially on mobile, where most orders now happen.",
-      "I'm Keyur, an e-commerce and Shopify developer based in Ahmedabad. I help brands, retailers and home businesses across India launch online stores, or improve the ones they already have.",
+      "I'm Keyur, an e-commerce and Shopify developer based in India. I help brands, retailers and home businesses across India launch online stores, or improve the ones they already have.",
     ],
     sections: [
       {
