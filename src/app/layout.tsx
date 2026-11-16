@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { RevealObserver } from "@/components/ui/RevealObserver";
 import { GlassFilter } from "@/components/ui/liquid-glass-button";
-import { CursorGlow } from "@/components/ui/CursorGlow";
+import { FluidCursor } from "@/components/ui/FluidCursor";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navbar />
           {children}
           <Footer />
-          <CursorGlow />
+          <FluidCursor />
         </MotionProvider>
         <RevealObserver />
       </body>
